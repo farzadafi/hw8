@@ -2,14 +2,16 @@ package Manager;
 
 import Manager.Exception.InvalidName;
 import Manager.Exception.InvalidNationalId;
+import Manager.Exception.InvalidPassword;
 
 import java.util.Scanner;
 
 public class Utility {
     private Scanner input = new Scanner(System.in);
-    private String fullName,nationalId;
+    private String fullName,nationalId,password;
     private InvalidName invalidName = new InvalidName();
     private InvalidNationalId invalidNationalId = new InvalidNationalId();
+    private InvalidPassword invalidPassword = new InvalidPassword();
 
 
     public String setFullName(){
@@ -39,6 +41,21 @@ public class Utility {
         }
         return nationalId;
     }
+
+    public String setPassword(){
+        while(true) {
+            System.out.print("Enter your password:");
+            try {
+                password = input.nextLine();
+                invalidPassword.passwordCheck(password);
+                break;
+            } catch (InvalidPassword except) {
+                System.out.println(except.getMessage());
+            }
+        }
+        return password;
+    }
+
 
 
 }
