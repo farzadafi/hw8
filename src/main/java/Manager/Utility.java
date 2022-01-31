@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Utility {
     private Scanner input = new Scanner(System.in);
-    private String fullName,nationalId,password;
+    private String fullName,nationalId,password,categoryName;
     private InvalidName invalidName = new InvalidName();
     private InvalidNationalId invalidNationalId = new InvalidNationalId();
     private InvalidPassword invalidPassword = new InvalidPassword();
@@ -54,6 +54,20 @@ public class Utility {
             }
         }
         return password;
+    }
+
+    public String setCategoryName(){
+        while(true){
+            System.out.print("Enter name(just alpha):");
+            try {
+                categoryName = input.nextLine();
+                invalidName.checkName(categoryName);
+                break;
+            }catch (InvalidName except){
+                System.out.println(except.getMessage());
+            }
+        }
+        return categoryName;
     }
 
 
