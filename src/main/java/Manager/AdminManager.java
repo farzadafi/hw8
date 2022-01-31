@@ -7,12 +7,17 @@ import Service.AdminService;
 import Service.CategoryService;
 import Service.LoginService;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
 public class AdminManager {
     private AdminService adminService = new AdminService();
-    private String fullName,nationalId,password,categoryName;
+    private String fullName,nationalId,password,categoryName,brandName;
     private Utility utility = new Utility();
     private LoginService loginService = new LoginService();
     private CategoryService categoryService = new CategoryService();
+    private Scanner input = new Scanner(System.in);
 
     //::::>
     public void addManager(){
@@ -49,4 +54,48 @@ public class AdminManager {
         else
             System.out.println("Something is wrong");
     }
+
+    public void addBrand(){
+        List<Category> categoryList = categoryService.findAll();
+        if(categoryList == null){
+            System.out.println("You first have define category!");
+            return;
+        }
+        int[] array = utility.returnIdCategory(categoryList);
+        for (Category cat:categoryList
+             ) {
+            System.out.println(cat.toString());
+        }
+        int id = utility.setId(array);
+        if(id == 0 ){
+            return;
+        }
+        System.out.print("Enter name of Brand:");
+        brandName = input.nextLine();
+        Category category = new Category(id,brandName);
+        if(categoryService.add(category) != 0 )
+            System.out.println(brandName + " successful added!");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
