@@ -9,7 +9,10 @@ public class Product {
     private int number;
     private Double price;
 
-    public Product(int id, int adminId,int categoryId,int brandId, String name, int number, Double price) {
+    public Product() {
+    }
+
+    public Product(int id, int adminId, int categoryId, int brandId, String name, int number, Double price) {
         this.id = id;
         this.adminId = adminId;
         this.categoryId = categoryId;
@@ -24,6 +27,12 @@ public class Product {
         this.categoryId = categoryId;
         this.brandId = brandId;
         this.name = name;
+        this.number = number;
+        this.price = price;
+    }
+
+    public Product(int id, int number, Double price) {
+        this.id = id;
         this.number = number;
         this.price = price;
     }
@@ -82,5 +91,17 @@ public class Product {
 
     public void setBrandId(int brandId) {
         this.brandId = brandId;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", categoryId=" + categoryId +
+                ", brandId=" + brandId +
+                ", name='" + name + '\'' +
+                ", number=" + number +
+                ", price=" + price +
+                '}';
     }
 }
