@@ -9,7 +9,6 @@ import Service.CategoryService;
 import Service.LoginService;
 import Service.ProductService;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -111,27 +110,36 @@ public class AdminManager {
             int idBrand = utility.setId(array);
             System.out.print("Enter name for Product:");
             productName = input.nextLine();
-            System.out.print("Please number of " + productName + ":");
-            try {
-                number = input.nextInt();
-                input.nextLine();
-            }catch (Exception exception){
-                input.nextLine();
-                System.out.println("just enter number Professor!");
-                return;
-            }
-            System.out.print("Please enter price for " + productName + ":");
-            try {
-                price = input.nextDouble();
-                input.nextLine();
-            }catch (Exception exception){
-                input.nextLine();
-                System.out.println("just enter number Professor!");
-                return;
-            }
+            number = utility.setNumberProduct(productName);
+            price = utility.setPriceProduct(productName);
             Product product = new Product(id,idCategory,idBrand,productName,number,price);
             if(productService.add(product) != 0 )
                 System.out.println(productName + " successful added!");
+            else
+                System.out.println("Something is wrong!");
+        }
+
+
+        public void editProduct(int id){
+            List<Product> productList = productService.showAdminProduct(id);
+            if(productList == null){
+                System.out.println("You first have define Product!");
+                return;
+            }
+            int[] array = utility.returnIdProduct(productList);
+            for (Product pro:productList
+            ) {
+                System.out.println(pro.toString());
+            }
+            int idProduct = utility.setId(array);
+            if(idProduct == 0 ){
+                return;
+            }
+            number = utility.setNumberProduct("new");
+            price = utility.setPriceProduct("new");
+            Product product = new Product(idProduct,number,price);
+            if(productService.update(product) != 0 )
+                System.out.println("This operation is successful!");
             else
                 System.out.println("Something is wrong!");
         }
