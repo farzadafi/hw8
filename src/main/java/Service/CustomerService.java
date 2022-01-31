@@ -1,13 +1,17 @@
 package Service;
 
 import Entity.Customer;
+import Repository.CustomerRepository;
 
 import java.util.List;
 
 public class CustomerService implements Service<Customer> {
+    CustomerRepository customerRepository = new CustomerRepository();
+
+
     @Override
     public int add(Customer customer) {
-        return 0;
+        return customerRepository.add(customer);
     }
 
     @Override
