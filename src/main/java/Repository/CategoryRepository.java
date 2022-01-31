@@ -4,7 +4,9 @@ import Entity.Category;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryRepository implements Repository<Category> {
@@ -37,6 +39,25 @@ public class CategoryRepository implements Repository<Category> {
 
     @Override
     public List<Category> findAll() {
+        try {
+            String findAll = "SELECT * FROM Category WHERE parentId = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(findAll);
+            preparedStatement.setInt(1,0);
+            List<Category> categoryList = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                    Category category = new Category();
+                    category.setId(resultSet.getInt("id"));
+                    category.setName(resultSet.getString("nameCategory"));
+                    categoryList.add(category);
+                }
+                return categoryList;
+            } else
+                return null;
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
         return null;
     }
 
