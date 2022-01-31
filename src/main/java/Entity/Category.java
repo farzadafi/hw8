@@ -5,6 +5,9 @@ public class Category {
     private int id;
     private String name;
 
+    public Category() {
+    }
+
     public Category(int parentId, int id, String name) {
         this.parentId = parentId;
         this.id = id;
@@ -42,5 +45,13 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
