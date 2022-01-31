@@ -1,4 +1,5 @@
 import Manager.AdminManager;
+import Manager.CustomerManager;
 
 import java.sql.SQLException;
 import java.util.InputMismatchException;
@@ -8,6 +9,7 @@ public class Menu {
     private Scanner input = new Scanner(System.in);
     private int command;
     private AdminManager adminManager = new AdminManager();
+    private CustomerManager customerManager = new CustomerManager();
 
     //::::>
     public int publicMenu(){
@@ -64,7 +66,7 @@ public class Menu {
                 break;
 
             case 2:
-                //cinemaManager.registerCinema();
+                customerManager.addCustomer();
                 break;
 
             case 3:
