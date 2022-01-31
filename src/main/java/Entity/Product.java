@@ -3,20 +3,23 @@ package Entity;
 public class Product {
     private int id;
     private int adminId;
+    private int categoryId;
     private String name;
     private int number;
     private Double price;
 
-    public Product(int id, int adminId, String name, int number, Double price) {
+    public Product(int id, int adminId,int categoryId, String name, int number, Double price) {
         this.id = id;
         this.adminId = adminId;
+        this.categoryId = categoryId;
         this.name = name;
         this.number = number;
         this.price = price;
     }
 
-    public Product(int adminId, String name, int number, Double price) {
+    public Product(int adminId,int categoryId, String name, int number, Double price) {
         this.adminId = adminId;
+        this.categoryId = categoryId;
         this.name = name;
         this.number = number;
         this.price = price;
