@@ -116,7 +116,7 @@ public class Menu {
             System.out.println("2-Add category.");
             System.out.println("3-Add brand.");
             System.out.println("4-Add Product.");
-            System.out.println("5-Add number to product.");
+            System.out.println("5-Add number to product or define new price.");
             System.out.println("6-Remove product.");
             System.out.println("7-Add off code.");
             System.out.println("8-View my sale.");
@@ -148,6 +148,10 @@ public class Menu {
 
                 case 4:
                     adminManager.addProduct(id);
+                    break;
+
+                case 5:
+                    adminManager.editProduct(id);
                     break;
 
                 case 10:
