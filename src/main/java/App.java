@@ -8,7 +8,7 @@ public class App {
         while(true){
             switch(menu.publicMenu()){
                 case 1:
-                    //menu.enterMenu();
+                    menu.enterMenu();
                     break;
 
                 case 2:
