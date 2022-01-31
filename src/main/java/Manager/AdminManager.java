@@ -2,10 +2,12 @@ package Manager;
 
 import Entity.Admin;
 import Entity.Category;
+import Entity.Product;
 import Entity.TypeUser;
 import Service.AdminService;
 import Service.CategoryService;
 import Service.LoginService;
+import Service.ProductService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,11 +15,14 @@ import java.util.Scanner;
 
 public class AdminManager {
     private AdminService adminService = new AdminService();
-    private String fullName,nationalId,password,categoryName,brandName;
+    private String fullName,nationalId,password,categoryName,brandName,productName;
+    private Double price;
+    private int number;
     private Utility utility = new Utility();
     private LoginService loginService = new LoginService();
     private CategoryService categoryService = new CategoryService();
     private Scanner input = new Scanner(System.in);
+    private ProductService productService = new ProductService();
 
     //::::>
     public void addManager(){
@@ -56,7 +61,7 @@ public class AdminManager {
     }
 
     public void addBrand(){
-        List<Category> categoryList = categoryService.findAll();
+        List<Category> categoryList = categoryService.showCategory(0);
         if(categoryList == null){
             System.out.println("You first have define category!");
             return;
@@ -75,6 +80,60 @@ public class AdminManager {
         Category category = new Category(id,brandName);
         if(categoryService.add(category) != 0 )
             System.out.println(brandName + " successful added!");
+        }
+
+        public void addProduct(int id){
+            List<Category> categoryList = categoryService.showCategory(0);
+            if(categoryList == null){
+                System.out.println("You first have define category!");
+                return;
+            }
+            int[] array = utility.returnIdCategory(categoryList);
+            for (Category cat:categoryList
+            ) {
+                System.out.println(cat.toString());
+            }
+            int idCategory = utility.setId(array);
+            if(id == 0 ){
+                return;
+            }
+            categoryList = categoryService.showCategory(idCategory);
+            if(categoryList == null){
+                System.out.println("You first have define brand!");
+                return;
+            }
+            System.out.println("This brand we have:");
+            for (Category cat:categoryList
+            ) {
+                System.out.println(cat.toString());
+            }
+            array = utility.returnIdCategory(categoryList);
+            int idBrand = utility.setId(array);
+            System.out.print("Enter name for Product:");
+            productName = input.nextLine();
+            System.out.print("Please number of " + productName + ":");
+            try {
+                number = input.nextInt();
+                input.nextLine();
+            }catch (Exception exception){
+                input.nextLine();
+                System.out.println("just enter number Professor!");
+                return;
+            }
+            System.out.print("Please enter price for " + productName + ":");
+            try {
+                price = input.nextDouble();
+                input.nextLine();
+            }catch (Exception exception){
+                input.nextLine();
+                System.out.println("just enter number Professor!");
+                return;
+            }
+            Product product = new Product(id,idCategory,idBrand,productName,number,price);
+            if(productService.add(product) != 0 )
+                System.out.println(productName + " successful added!");
+            else
+                System.out.println("Something is wrong!");
         }
 
 
