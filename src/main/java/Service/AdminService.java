@@ -22,7 +22,7 @@ public class AdminService implements Service<Admin> {
 
     @Override
     public int update(Admin admin) {
-        return 0;
+        return adminRepository.update(admin);
     }
 
     @Override
