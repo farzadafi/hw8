@@ -15,7 +15,7 @@ public class AdminRepository implements Repository<Admin> {
             this.connection = Singleton.getInstance().getConnection();
             String CreateTable = "CREATE TABLE IF NOT EXISTS UserTable(id serial PRIMARY KEY," +
                     "fullName varchar(50)," +
-                    "nationalId varchar(20)," +
+                    "nationalId varchar(20) UNIQUE," +
                     "password varchar(50)," +
                     "kind varchar(50)," +
                     "address varchar(100)," +
@@ -52,6 +52,16 @@ public class AdminRepository implements Repository<Admin> {
 
     @Override
     public int update(Admin admin) {
+        try {
+            String update = "UPDATE UserTable SET fullName = ? , password = ? WHERE id = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(update);
+            preparedStatement.setString(1,admin.getFullName());
+            preparedStatement.setString(2,admin.getPassword());
+            preparedStatement.setInt(3,admin.getId());
+            return preparedStatement.executeUpdate();
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
         return 0;
     }
 
