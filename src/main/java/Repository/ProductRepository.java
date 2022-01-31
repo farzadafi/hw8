@@ -1,11 +1,14 @@
 package Repository;
 
 import Entity.Admin;
+import Entity.Category;
 import Entity.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRepository implements Repository<Product> {
@@ -54,6 +57,16 @@ public class ProductRepository implements Repository<Product> {
 
     @Override
     public int update(Product product) {
+        try {
+            String update = "UPDATE product SET numberProduct = numberProduct + ? , price = ? WHERE id = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(update);
+            preparedStatement.setInt(1,product.getNumber());
+            preparedStatement.setDouble(2,product.getPrice());
+            preparedStatement.setInt(3,product.getId());
+            return preparedStatement.executeUpdate();
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
         return 0;
     }
 
@@ -61,4 +74,34 @@ public class ProductRepository implements Repository<Product> {
     public int delete(int id) {
         return 0;
     }
+
+    public List<Product> showAdminProduct(int id){
+        try {
+            String findAll = "SELECT * FROM Product WHERE adminId = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(findAll);
+            preparedStatement.setInt(1,id);
+            List<Product> productList = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                    Product product = new Product();
+                    product.setId(resultSet.getInt("id"));
+                    product.setCategoryId(resultSet.getInt("categoryId"));
+                    product.setBrandId(resultSet.getInt("brandId"));
+                    product.setName(resultSet.getString("nameProduct"));
+                    product.setNumber(resultSet.getInt("numberProduct"));
+                    product.setPrice(resultSet.getDouble("price"));
+                    productList.add(product);
+                }
+                return productList;
+            } else
+                return null;
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return null;
+    }
+
+
+
 }
