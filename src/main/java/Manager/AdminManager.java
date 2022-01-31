@@ -11,7 +11,7 @@ public class AdminManager {
     private Utility utility = new Utility();
     private LoginService loginService = new LoginService();
 
-
+    //::::>
     public void addManager(){
         fullName= utility.setFullName();
         while(true){
@@ -25,6 +25,16 @@ public class AdminManager {
         Admin admin = new Admin(fullName,nationalId,password,TypeUser.ADMIN);
         if(adminService.add(admin) != 0 ){
             System.out.println(fullName + " successful added!");
+        }
+    }
+
+    //::::>
+    public void editManager(int id){
+        fullName = utility.setFullName();
+        password = utility.setPassword();
+        Admin admin = new Admin(id,fullName,null,password,null);
+        if(adminService.update(admin) != 0 ){
+            System.out.println(fullName + " successful updated!");
         }
     }
 }
