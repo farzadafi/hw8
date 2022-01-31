@@ -144,6 +144,27 @@ public class AdminManager {
                 System.out.println("Something is wrong!");
         }
 
+        public void removeProduct(int id){
+            List<Product> productList = productService.showAdminProduct(id);
+            if(productList == null){
+                System.out.println("You first have define Product!");
+                return;
+            }
+            int[] array = utility.returnIdProduct(productList);
+            for (Product pro:productList
+            ) {
+                System.out.println(pro.toString());
+            }
+            int idProduct = utility.setId(array);
+            if(idProduct == 0 ){
+                return;
+            }
+            if( productService.delete(idProduct) != 0 )
+                System.out.println("This product successful Removed!");
+            else
+                System.out.println("Something is wrong!");
+        }
+
 
 
 
