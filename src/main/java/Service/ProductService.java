@@ -26,7 +26,7 @@ public class ProductService implements Service<Product> {
 
     @Override
     public int delete(int id) {
-        return 0;
+       return productRepository.delete(id);
     }
 
     public List<Product> showAdminProduct(int id){
