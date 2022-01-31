@@ -1,5 +1,7 @@
+import Entity.User;
 import Manager.AdminManager;
 import Manager.CustomerManager;
+import Service.LoginService;
 
 import java.sql.SQLException;
 import java.util.InputMismatchException;
@@ -7,9 +9,12 @@ import java.util.Scanner;
 
 public class Menu {
     private Scanner input = new Scanner(System.in);
+    private boolean isTrue = true;
     private int command;
+    private String username,password;
     private AdminManager adminManager = new AdminManager();
     private CustomerManager customerManager = new CustomerManager();
+    private LoginService loginService = new LoginService();
 
     //::::>
     public int publicMenu(){
@@ -78,5 +83,76 @@ public class Menu {
         }
     }
 
+    //::::>
+    public void enterMenu() throws SQLException, ClassNotFoundException {
+        System.out.print("Please enter your username:");
+        username = input.nextLine();
+        User user = loginService.returnUser(username);
+        if(user == null){
+            System.out.println("This user name not define before,Please sign up!");
+            return;
+        }
+        System.out.print("Please enter your password:");
+        password = input.nextLine();
+        if(!password.equals(user.getPassword())){
+            System.out.println("This password is wrong!");
+            return;
+        }
+        if(String.valueOf(user.getTypeUser()).equals("ADMIN"))
+            adminMenu(user.getId());
+        else if(String.valueOf(user.getTypeUser()).equals("CUSTOMER"))
+            customerMenu(user.getId());
+        else
+            System.out.println("It's very Strange!");
+    }
 
-}//while
+
+    //::::>
+    public void adminMenu(int id) throws SQLException {
+        System.out.println(id);
+        isTrue = true;
+        while(isTrue) {
+            System.out.println("*** Admin Menu ***");
+            System.out.println("1-.");
+            System.out.println("2-.");
+            System.out.println("10-Exit.");
+            while(true) {
+                try {
+                    command = input.nextInt();
+                    input.nextLine();
+                    break;
+                } catch (InputMismatchException exception) {
+                    input.nextLine();
+                    System.out.print("Enter a number:");
+                }
+            }
+            switch (command)
+            {
+                case 1:
+
+                    break;
+
+                case 2:
+
+                    break;
+
+                case 10:
+                    System.out.println("Good luck!");
+                    isTrue = false;
+                    break;
+
+                default:
+                    System.out.println("you enter a wrong number!");
+            }
+        }
+    }
+
+    //::::>
+    public void customerMenu(int id){
+        System.out.println("customerMenu");
+        System.out.println(id);
+    }
+
+
+
+}
