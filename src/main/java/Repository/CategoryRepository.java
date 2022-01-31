@@ -15,7 +15,7 @@ public class CategoryRepository implements Repository<Category> {
     public CategoryRepository() {
         try {
             connection = Singleton.getInstance().getConnection();
-            String createTable = "CREATE TABLE IF NOT EXISTS Category(parentId integer,id serial PRIMARY KEY,nameCategory varchar(50)) ";
+            String createTable = "CREATE TABLE IF NOT EXISTS Category(parentId integer ,id serial PRIMARY KEY,nameCategory varchar(50)) ";
             PreparedStatement preparedStatement = connection.prepareStatement(createTable);
             preparedStatement.execute();
         }catch (SQLException | ClassNotFoundException exception){
@@ -69,5 +69,29 @@ public class CategoryRepository implements Repository<Category> {
     @Override
     public int delete(int id) {
         return 0;
+    }
+
+
+    public List<Category> showCategory(int number) {
+        try {
+            String findAll = "SELECT * FROM Category WHERE parentId = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(findAll);
+            preparedStatement.setInt(1,number);
+            List<Category> categoryList = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                    Category category = new Category();
+                    category.setId(resultSet.getInt("id"));
+                    category.setName(resultSet.getString("nameCategory"));
+                    categoryList.add(category);
+                }
+                return categoryList;
+            } else
+                return null;
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return null;
     }
 }
