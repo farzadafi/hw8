@@ -146,6 +146,10 @@ public class Menu {
                     adminManager.addBrand();
                     break;
 
+                case 4:
+                    adminManager.addProduct(id);
+                    break;
+
                 case 10:
                     System.out.println("Good luck!");
                     isTrue = false;
