@@ -1,13 +1,17 @@
 package Service;
 
 import Entity.Category;
+import Repository.CategoryRepository;
 
 import java.util.List;
 
 public class CategoryService implements Service<Category> {
+    private CategoryRepository categoryRepository = new CategoryRepository();
+
+
     @Override
     public int add(Category category) {
-        return 0;
+        return categoryRepository.add(category);
     }
 
     @Override
