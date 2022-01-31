@@ -64,4 +64,12 @@ public class Product {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
 }
