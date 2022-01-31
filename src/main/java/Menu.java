@@ -121,6 +121,7 @@ public class Menu {
             System.out.println("7-Add off code.");
             System.out.println("8-View my sale.");
             System.out.println("10-Exit.");
+            System.out.print("Please select a number:");
             while(true) {
                 try {
                     command = input.nextInt();
@@ -138,7 +139,7 @@ public class Menu {
                     break;
 
                 case 2:
-
+                    adminManager.addCategory();
                     break;
 
                 case 10:
