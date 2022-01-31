@@ -26,7 +26,7 @@ public class LoginRepository {
             preparedStatement.setString(1, nationalId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                User user = new User(resultSet.getString("fullName"), resultSet.getString("nationalId"), resultSet.getString("password"), TypeUser.valueOf(resultSet.getString("kind")));
+                User user = new User(resultSet.getInt("id"),resultSet.getString("fullName"), resultSet.getString("nationalId"), resultSet.getString("password"), TypeUser.valueOf(resultSet.getString("kind")));
                 return user;
             } else
                 return null;
