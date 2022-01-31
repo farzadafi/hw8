@@ -109,12 +109,17 @@ public class Menu {
 
     //::::>
     public void adminMenu(int id) throws SQLException {
-        System.out.println(id);
         isTrue = true;
         while(isTrue) {
             System.out.println("*** Admin Menu ***");
-            System.out.println("1-.");
-            System.out.println("2-.");
+            System.out.println("1-Edit my information.");
+            System.out.println("2-Add category.");
+            System.out.println("3-Add brand.");
+            System.out.println("4-Add Product.");
+            System.out.println("5-Add number to product.");
+            System.out.println("6-Remove product.");
+            System.out.println("7-Add off code.");
+            System.out.println("8-View my sale.");
             System.out.println("10-Exit.");
             while(true) {
                 try {
@@ -129,7 +134,7 @@ public class Menu {
             switch (command)
             {
                 case 1:
-
+                    adminManager.editManager(id);
                     break;
 
                 case 2:
