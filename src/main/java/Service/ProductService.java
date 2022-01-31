@@ -21,11 +21,15 @@ public class ProductService implements Service<Product> {
 
     @Override
     public int update(Product product) {
-        return 0;
+        return productRepository.update(product);
     }
 
     @Override
     public int delete(int id) {
         return 0;
+    }
+
+    public List<Product> showAdminProduct(int id){
+        return productRepository.showAdminProduct(id);
     }
 }
