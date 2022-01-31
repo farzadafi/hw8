@@ -28,4 +28,8 @@ public class CategoryService implements Service<Category> {
     public int delete(int id) {
         return 0;
     }
+
+    public List<Category> showCategory(int number){
+        return categoryRepository.showCategory(number);
+    }
 }
