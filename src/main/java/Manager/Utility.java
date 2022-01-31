@@ -1,6 +1,7 @@
 package Manager;
 
 import Entity.Category;
+import Entity.Product;
 import Manager.Exception.InvalidName;
 import Manager.Exception.InvalidNationalId;
 import Manager.Exception.InvalidPassword;
@@ -10,6 +11,8 @@ import java.util.Scanner;
 
 public class Utility {
     private Scanner input = new Scanner(System.in);
+    private int number;
+    private Double price;
     private String fullName,nationalId,password,categoryName;
     private InvalidName invalidName = new InvalidName();
     private InvalidNationalId invalidNationalId = new InvalidNationalId();
@@ -111,6 +114,62 @@ public class Utility {
             index++;
         }
         return arrayInt;
+    }
+
+    public int[] returnIdProduct(List<Product> productList){
+        int[] arrayInt = new int[50];
+        int index = 0;
+        for (Product pro:productList
+        ) {
+            Product pro1 = new Product();
+            pro1 = pro;
+            arrayInt[index] = pro.getId();
+            index++;
+        }
+        return arrayInt;
+    }
+
+    public int setNumberProduct(String name){
+        while (true) {
+            System.out.print("Please number of " + name + ":");
+            while (true) {
+                try {
+                    number = input.nextInt();
+                    input.nextLine();
+                    break;
+                } catch (Exception exception) {
+                    input.nextLine();
+                    System.out.print("Enter just number:");
+                }
+            }
+            if (number < 0) {
+                System.out.println("You have enter a number more than Zero!");
+            }
+            else
+                break;
+        }
+        return number;
+    }
+
+    public Double setPriceProduct(String name){
+        while(true){
+            System.out.print("Please enter price for " + name + ":");
+            while (true) {
+                try {
+                    price = input.nextDouble();
+                    input.nextLine();
+                    break;
+                } catch (Exception exception) {
+                    input.nextLine();
+                    System.out.print("Enter just number:");
+                }
+            }
+            if(price < 0 ){
+                System.out.println("You have enter a price more than Zero!");
+            }else
+                break;
+        }
+        return price;
     }
 
 
