@@ -200,7 +200,7 @@ public class Menu {
                     break;
 
                 case 2:
-
+                    customerManager.addProduct(id);
                     break;
 
                 case 3:
