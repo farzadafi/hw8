@@ -44,6 +44,17 @@ public class CustomerRepository implements Repository<Customer> {
 
     @Override
     public int update(Customer customer) {
+        try {
+            String update = "UPDATE UserTable SET fullName = ? , password = ? , address = ?  WHERE id = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(update);
+            preparedStatement.setString(1,customer.getFullName());
+            preparedStatement.setString(2,customer.getPassword());
+            preparedStatement.setString(3,customer.getAddress());
+            preparedStatement.setInt(4,customer.getId());
+            return preparedStatement.executeUpdate();
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
         return 0;
     }
 
