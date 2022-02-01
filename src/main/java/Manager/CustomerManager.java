@@ -35,4 +35,15 @@ public class CustomerManager {
         else
             System.out.println("Something is wrong!");
     }
+
+    public void editCustomer(int id){
+        fullName = utility.setFullName();
+        password = utility.setPassword();
+        System.out.print("Enter your new address:");
+        address = input.nextLine();
+        Customer customer = new Customer(id,fullName,null,password,null,address,null);
+        if(customerService.update(customer) != 0 ){
+            System.out.println(fullName + " successful updated!");
+        }
+    }
 }
