@@ -1,13 +1,17 @@
 package Service;
 
 import Entity.CustomerBasket;
+import Repository.CustomerBasketRepository;
 
 import java.util.List;
 
 public class CustomerBasketService implements Service<CustomerBasket> {
+    private CustomerBasketRepository customerBasketRepository = new CustomerBasketRepository();
+
+
     @Override
     public int add(CustomerBasket customerBasket) {
-        return 0;
+        return customerBasketRepository.add(customerBasket);
     }
 
     @Override
