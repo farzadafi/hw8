@@ -93,7 +93,7 @@ public class AdminManager {
                 System.out.println(cat.toString());
             }
             int idCategory = utility.setId(array);
-            if(id == 0 ){
+            if(idCategory == 0 ){
                 return;
             }
             categoryList = categoryService.showCategory(idCategory);
