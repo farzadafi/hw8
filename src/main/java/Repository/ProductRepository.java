@@ -110,6 +110,35 @@ public class ProductRepository implements Repository<Product> {
         return null;
     }
 
+    public List<Product> showProductForCustomer(int idCategory,int idBrand) {
+        try {
+            String findAll = "SELECT * FROM Product WHERE categoryId = ? AND brandId = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(findAll);
+            preparedStatement.setInt(1, idCategory);
+            preparedStatement.setInt(2, idBrand);
+            List<Product> productList = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                    Product product = new Product();
+                    product.setId(resultSet.getInt("id"));
+                    product.setCategoryId(resultSet.getInt("categoryId"));
+                    product.setBrandId(resultSet.getInt("brandId"));
+                    product.setName(resultSet.getString("nameProduct"));
+                    product.setNumber(resultSet.getInt("numberProduct"));
+                    product.setPrice(resultSet.getDouble("price"));
+                    productList.add(product);
+                }
+                return productList;
+            } else
+                return null;
+        } catch (SQLException exception) {
+            System.out.println(exception.getMessage());
+        }
+        return null;
+    }
 
 
-}
+
+
+    }
