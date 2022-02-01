@@ -171,8 +171,65 @@ public class Menu {
 
     //::::>
     public void customerMenu(int id){
-        System.out.println("customerMenu");
-        System.out.println(id);
+        isTrue = true;
+        while(isTrue) {
+            System.out.println("*** Customer Menu ***");
+            System.out.println("1-Edit my information.");
+            System.out.println("2-Add Product.");
+            System.out.println("3-Remove product.");
+            System.out.println("4-Add budget.");
+            System.out.println("5-View my basket.");
+            System.out.println("6-Final purchase.");
+            System.out.println("7-View my bought Product.");
+            System.out.println("10-Exit.");
+            System.out.print("Please select a number:");
+            while(true) {
+                try {
+                    command = input.nextInt();
+                    input.nextLine();
+                    break;
+                } catch (InputMismatchException exception) {
+                    input.nextLine();
+                    System.out.print("Enter a number:");
+                }
+            }
+            switch (command)
+            {
+                case 1:
+                    customerManager.editCustomer(id);
+                    break;
+
+                case 2:
+
+                    break;
+
+                case 3:
+
+                    break;
+
+                case 4:
+
+                    break;
+
+                case 5:
+
+                    break;
+
+
+                case 6:
+
+                    break;
+
+
+                case 10:
+                    System.out.println("Good luck!");
+                    isTrue = false;
+                    break;
+
+                default:
+                    System.out.println("you enter a wrong number!");
+            }
+        }
     }
 
 
