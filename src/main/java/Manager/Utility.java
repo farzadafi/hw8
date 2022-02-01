@@ -86,6 +86,10 @@ public class Utility {
             System.out.println("just Enter number Professor!");
             return 0;
         }
+        if(id == 0 ){
+            System.out.println("You enter a wrong Id");
+            return 0;
+        }
         boolean isContain = false;
         for (int number:array
         ) {
@@ -170,6 +174,26 @@ public class Utility {
                 break;
         }
         return price;
+    }
+
+    public int setNumberProduct(int idProduct,List<Product> productList){
+        for (Product pro:productList
+        ) {
+            if(pro.getId() == idProduct ){
+                return pro.getNumber();
+            }
+        }
+        return -1;
+    }
+
+    public Double returnPriceProduct(int idProduct,List<Product> productList){
+        for (Product pro:productList
+        ) {
+            if(pro.getId() == idProduct ){
+                return pro.getPrice();
+            }
+        }
+        return 0d;
     }
 
 
