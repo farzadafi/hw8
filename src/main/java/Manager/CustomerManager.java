@@ -1,11 +1,9 @@
 package Manager;
 
-import Entity.Admin;
-import Entity.Customer;
-import Entity.TypeUser;
-import Service.CustomerService;
-import Service.LoginService;
+import Entity.*;
+import Service.*;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class CustomerManager {
@@ -14,6 +12,9 @@ public class CustomerManager {
     private Utility utility = new Utility();
     private LoginService loginService = new LoginService();
     private CustomerService customerService = new CustomerService();
+    private CategoryService categoryService = new CategoryService();
+    private ProductService productService = new ProductService();
+    private CustomerBasketService customerBasketService = new CustomerBasketService();
 
 
     public void addCustomer(){
@@ -45,5 +46,64 @@ public class CustomerManager {
         if(customerService.update(customer) != 0 ){
             System.out.println(fullName + " successful updated!");
         }
+    }
+
+    public void addProduct(int id){
+        List<Category> categoryList = categoryService.showCategory(0);
+        if(categoryList == null){
+            System.out.println("Unfortunately We dont have any product for sale!");
+            return;
+        }
+        int[] array = utility.returnIdCategory(categoryList);
+        for (Category cat:categoryList
+        ) {
+            System.out.println(cat.toString());
+        }
+        int idCategory = utility.setId(array);
+        if(idCategory == 0 ){
+            return;
+        }
+        categoryList = categoryService.showCategory(idCategory);
+        if(categoryList == null){
+            System.out.println("Unfortunately We dont have any product in this category!");
+            return;
+        }
+        System.out.println("This brand we have:");
+        for (Category cat:categoryList
+        ) {
+            System.out.println(cat.toString());
+        }
+        array = utility.returnIdCategory(categoryList);
+        int idBrand = utility.setId(array);
+        List<Product> productList = productService.showProductForCustomer(idCategory,idBrand);
+        if(productList == null){
+            System.out.println("Unfortunately We dont have any product in this brand!");
+            return;
+        }
+        System.out.println("We have this product in this brand:");
+        for (Product pro:productList
+        ) {
+            System.out.println(pro.toString());
+        }
+        array = utility.returnIdProduct(productList);
+        int idProduct = utility.setId(array);
+        if(idProduct == 0 )
+            return;
+        int number = utility.setNumberProduct(idProduct,productList);
+        if(number == -1 ){
+            System.out.println("SomeThing is wrong!");
+            return;
+        }
+        int numberCustomerBuy = utility.setNumberProduct("product you want to buy:");
+        if(numberCustomerBuy > number ){
+            System.out.println("We dont have " + numberCustomerBuy + " number from this product!");
+            return;
+        }
+        Double price = utility.returnPriceProduct(idProduct,productList);
+        CustomerBasket customerBasket = new CustomerBasket(id,idProduct,numberCustomerBuy,numberCustomerBuy*price);
+        if(customerBasketService.add(customerBasket) != 0 )
+            System.out.println(numberCustomerBuy + " number from this product with " + numberCustomerBuy*price + " price added to your basket!");
+        else
+            System.out.println("Something is wrong!");
     }
 }
