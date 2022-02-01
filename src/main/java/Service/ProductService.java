@@ -32,4 +32,8 @@ public class ProductService implements Service<Product> {
     public List<Product> showAdminProduct(int id){
         return productRepository.showAdminProduct(id);
     }
+
+    public List<Product> showProductForCustomer(int idCategory,int idBrand){
+        return productRepository.showProductForCustomer(idCategory,idBrand);
+    }
 }
