@@ -1,6 +1,7 @@
 package Manager;
 
 import Entity.Category;
+import Entity.CustomerBasket;
 import Entity.Product;
 import Manager.Exception.InvalidName;
 import Manager.Exception.InvalidNationalId;
@@ -194,6 +195,19 @@ public class Utility {
             }
         }
         return 0d;
+    }
+
+    public int[] returnIdCustomerBasket(List<CustomerBasket> customerBasketList){
+        int[] arrayInt = new int[50];
+        int index = 0;
+        for (CustomerBasket cat:customerBasketList
+        ) {
+            CustomerBasket cat1 = new CustomerBasket();
+            cat1 = cat;
+            arrayInt[index] = cat.getId();
+            index++;
+        }
+        return arrayInt;
     }
 
 
