@@ -212,7 +212,7 @@ public class Menu {
                     break;
 
                 case 5:
-
+                    customerManager.viewMyBasket(id);
                     break;
 
 
