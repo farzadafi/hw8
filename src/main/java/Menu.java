@@ -220,6 +220,10 @@ public class Menu {
                     customerManager.finalPurchase(id);
                     break;
 
+                case 7:
+                    customerManager.saleProduct(id);
+                    break;
+
 
                 case 10:
                     System.out.println("Good luck!");
