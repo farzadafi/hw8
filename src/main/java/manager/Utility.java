@@ -1,11 +1,11 @@
-package Manager;
+package manager;
 
 import entity.Category;
 import entity.CustomerBasket;
 import entity.Product;
-import Manager.Exception.InvalidName;
-import Manager.Exception.InvalidNationalId;
-import Manager.Exception.InvalidPassword;
+import manager.Exception.InvalidName;
+import manager.Exception.InvalidNationalId;
+import manager.Exception.InvalidPassword;
 
 import java.util.List;
 import java.util.Scanner;

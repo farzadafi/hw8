@@ -1,4 +1,4 @@
-package Manager.Exception;
+package manager.Exception;
 
 public class InvalidName extends RuntimeException{
     public InvalidName() {

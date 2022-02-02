@@ -1,4 +1,4 @@
-package Manager.Exception;
+package manager.Exception;
 
 public class InvalidPassword extends RuntimeException {
     public InvalidPassword() {

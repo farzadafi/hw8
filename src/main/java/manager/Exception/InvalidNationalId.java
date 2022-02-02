@@ -1,4 +1,4 @@
-package Manager.Exception;
+package manager.Exception;
 
 public class InvalidNationalId extends RuntimeException {
     public InvalidNationalId() {

@@ -1,6 +1,6 @@
 import entity.User;
-import Manager.AdminManager;
-import Manager.CustomerManager;
+import manager.AdminManager;
+import manager.CustomerManager;
 import Service.LoginService;
 
 import java.sql.SQLException;
