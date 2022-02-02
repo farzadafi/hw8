@@ -33,6 +33,10 @@ public class CustomerService implements Service<Customer> {
         return customerRepository.addBudget(id,amount);
     }
 
+    public Double returnBudget(int id){
+        return customerRepository.returnBudget(id);
+    }
+
 
 
 
