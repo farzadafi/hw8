@@ -5,6 +5,7 @@ import Entity.Customer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -74,6 +75,22 @@ public class CustomerRepository implements Repository<Customer> {
             System.out.println(exception.getMessage());
         }
         return 0;
+    }
+
+    public Double returnBudget(int id){
+        try {
+            String budget = "SELECT budget FROM UserTable WHERE id = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(budget);
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next())
+                return resultSet.getDouble("budget");
+            else
+                return 0d;
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return 0d;
     }
 
 
