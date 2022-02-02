@@ -183,6 +183,18 @@ public class CustomerManager {
         }
     }
 
+    public void saleProduct(int id){
+        List<SaleProduct> saleProductList = saleProductService.saleProductByCustomerId(id);
+        if(saleProductList == null ) {
+            System.out.println("You dont have any bought!");
+            return;
+        }
+            for (SaleProduct sale:saleProductList
+                 ) {
+                System.out.println(sale.toString());
+        }
+    }
+
 
 
 
