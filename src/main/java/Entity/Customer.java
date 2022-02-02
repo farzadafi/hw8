@@ -32,4 +32,7 @@ public class Customer extends User {
     public void setBalance(Double balance) {
         this.balance = balance;
     }
+
+    public Customer() {
+    }
 }
