@@ -22,6 +22,9 @@ public class CustomerBasket {
         this.totalPrice = totalPrice;
     }
 
+    public CustomerBasket() {
+    }
+
     public int getId() {
         return id;
     }
@@ -60,5 +63,15 @@ public class CustomerBasket {
 
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "CustomerBasket{" +
+                "id=" + id +
+                ", productId=" + productId +
+                ", number=" + number +
+                ", totalPrice=" + totalPrice +
+                '}';
     }
 }
