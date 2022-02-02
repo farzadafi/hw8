@@ -110,7 +110,29 @@ public class SaleProductRepository implements Repository<SaleProduct> {
 
         @Override
     public List<SaleProduct> findAll() {
-        return null;
+            try {
+                String findAll = "SELECT * FROM SaleProduct" ;
+                PreparedStatement preparedStatement = connection.prepareStatement(findAll);
+                List<SaleProduct> saleProductList = new ArrayList<>();
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet.isBeforeFirst()) {
+                    while (resultSet.next()) {
+                        SaleProduct saleProduct = new SaleProduct();
+                        saleProduct.setId(resultSet.getInt("id"));
+                        saleProduct.setCustomerId(resultSet.getInt("customerId"));
+                        saleProduct.setProductId(resultSet.getInt("productId"));
+                        saleProduct.setNumber(resultSet.getInt("numberProduct"));
+                        saleProduct.setTotalPrice(resultSet.getDouble("price"));
+                        saleProduct.setDate(resultSet.getDate("dateFinal"));
+                        saleProductList.add(saleProduct);
+                    }
+                    return saleProductList;
+                } else
+                    return null;
+            } catch (SQLException exception) {
+                System.out.println(exception.getMessage());
+            }
+            return null;
     }
 
     @Override
@@ -120,6 +142,14 @@ public class SaleProductRepository implements Repository<SaleProduct> {
 
     @Override
     public int delete(int id) {
+        try {
+            String del = "DELETE FROM SaleProduct WHERE id = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(del);
+            preparedStatement.setInt(1,id);
+            return preparedStatement.executeUpdate();
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
         return 0;
     }
 }
