@@ -217,7 +217,7 @@ public class Menu {
 
 
                 case 6:
-
+                    customerManager.finalPurchase(id);
                     break;
 
 
