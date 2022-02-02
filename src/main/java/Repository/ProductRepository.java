@@ -138,6 +138,35 @@ public class ProductRepository implements Repository<Product> {
         return null;
     }
 
+    public int returnNumberProduct(int id){
+        try {
+            String number = "SELECT numberProduct FROM Product WHERE id = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(number);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next())
+                return resultSet.getInt("numberProduct");
+            else
+                return 0;
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return 0;
+    }
+
+    public int minesNumberProduct(int id,int number){
+        try {
+            String mines = "UPDATE Product SET numberProduct = numberProduct - ? WHERE id = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(mines);
+            preparedStatement.setInt(1,number);
+            preparedStatement.setInt(2,id);
+            return preparedStatement.executeUpdate();
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return 0;
+    }
+
 
 
 
