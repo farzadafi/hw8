@@ -94,6 +94,24 @@ public class CustomerBasketRepository implements Repository<CustomerBasket> {
         return null;
     }
 
+    public int findIdBy(int customerId,int productId,int numberProduct){
+        try {
+            String findId = "SELECT id FROM CustomerBasket WHERE CustomerId = ? AND ProductId = ? AND numberProduct = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(findId);
+            preparedStatement.setInt(1,customerId);
+            preparedStatement.setInt(2,productId);
+            preparedStatement.setInt(3,numberProduct);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next())
+                return resultSet.getInt("id");
+            else
+                return 0;
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return 0;
+    }
+
 
 
 
