@@ -68,6 +68,14 @@ public class CategoryRepository implements Repository<Category> {
 
     @Override
     public int delete(int id) {
+        try {
+            String del = "DELETE FROM Category WHERE id = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(del);
+            preparedStatement.setInt(1,id);
+            return preparedStatement.executeUpdate();
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
         return 0;
     }
 
