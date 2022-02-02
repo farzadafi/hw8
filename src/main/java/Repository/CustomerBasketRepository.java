@@ -47,6 +47,27 @@ public class CustomerBasketRepository implements Repository<CustomerBasket> {
 
     @Override
     public List<CustomerBasket> findAll() {
+        try {
+            String findAll = "SELECT * FROM CustomerBasket ";
+            PreparedStatement preparedStatement = connection.prepareStatement(findAll);
+            List<CustomerBasket> customerBasketList = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                    CustomerBasket customerBasket = new CustomerBasket();
+                    customerBasket.setId(resultSet.getInt("id"));
+                    customerBasket.setCustomerId(resultSet.getInt("customerId"));
+                    customerBasket.setProductId(resultSet.getInt("productId"));
+                    customerBasket.setNumber(resultSet.getInt("numberProduct"));
+                    customerBasket.setTotalPrice(resultSet.getDouble("price"));
+                    customerBasketList.add(customerBasket);
+                }
+                return customerBasketList;
+            } else
+                return null;
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
         return null;
     }
 
