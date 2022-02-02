@@ -1,13 +1,7 @@
 package Manager;
 
-import Entity.Admin;
-import Entity.Category;
-import Entity.Product;
-import Entity.TypeUser;
-import Service.AdminService;
-import Service.CategoryService;
-import Service.LoginService;
-import Service.ProductService;
+import Entity.*;
+import Service.*;
 
 import java.util.List;
 import java.util.Scanner;
@@ -22,6 +16,7 @@ public class AdminManager {
     private CategoryService categoryService = new CategoryService();
     private Scanner input = new Scanner(System.in);
     private ProductService productService = new ProductService();
+    private SaleProductService saleProductService = new SaleProductService();
 
     //::::>
     public void addManager(){
@@ -164,6 +159,18 @@ public class AdminManager {
             else
                 System.out.println("Something is wrong!");
         }
+
+    public void saleProduct(int id){
+        List<SaleProduct> saleProductList = saleProductService.saleProductByAdminId(id);
+        if(saleProductList == null ) {
+            System.out.println("You dont have any Sale!");
+            return;
+        }
+        for (SaleProduct sale:saleProductList
+        ) {
+            System.out.println(sale.toString());
+        }
+    }
 
 
 
