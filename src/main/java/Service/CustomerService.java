@@ -1,6 +1,6 @@
 package Service;
 
-import Entity.Customer;
+import entity.Customer;
 import Repository.CustomerRepository;
 
 import java.util.List;

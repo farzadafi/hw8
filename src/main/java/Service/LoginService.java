@@ -1,6 +1,6 @@
 package Service;
 
-import Entity.User;
+import entity.User;
 import Repository.LoginRepository;
 
 public class LoginService {

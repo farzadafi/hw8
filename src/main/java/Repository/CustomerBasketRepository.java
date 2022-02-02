@@ -1,8 +1,6 @@
 package Repository;
 
-import Entity.Admin;
-import Entity.Category;
-import Entity.CustomerBasket;
+import entity.CustomerBasket;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

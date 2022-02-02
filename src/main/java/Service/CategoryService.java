@@ -1,6 +1,6 @@
 package Service;
 
-import Entity.Category;
+import entity.Category;
 import Repository.CategoryRepository;
 
 import java.util.List;

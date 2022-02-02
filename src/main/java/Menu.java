@@ -1,4 +1,4 @@
-import Entity.User;
+import entity.User;
 import Manager.AdminManager;
 import Manager.CustomerManager;
 import Service.LoginService;

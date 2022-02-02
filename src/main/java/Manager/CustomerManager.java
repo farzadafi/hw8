@@ -1,6 +1,6 @@
 package Manager;
 
-import Entity.*;
+import entity.*;
 import Service.*;
 
 import java.sql.Date;
@@ -179,6 +179,7 @@ public class CustomerManager {
                 productService.minesNumberProduct(cat.getProductId(),cat.getNumber());
                 customerService.addBudget(id,-cat.getTotalPrice());
                 customerBasketService.delete(customerBasketService.findIdBy(cat.getCustomerId(),cat.getProductId(), cat.getNumber()));
+                System.out.println(cat.getProductId() + " is successful added!");
             }
         }
     }

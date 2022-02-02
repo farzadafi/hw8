@@ -1,6 +1,6 @@
 package Service;
 
-import Entity.SaleProduct;
+import entity.SaleProduct;
 import Repository.SaleProductRepository;
 
 import java.util.List;

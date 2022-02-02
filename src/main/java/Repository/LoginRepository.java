@@ -1,7 +1,7 @@
 package Repository;
 
-import Entity.TypeUser;
-import Entity.User;
+import entity.TypeUser;
+import entity.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

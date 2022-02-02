@@ -1,8 +1,8 @@
 package Manager;
 
-import Entity.Category;
-import Entity.CustomerBasket;
-import Entity.Product;
+import entity.Category;
+import entity.CustomerBasket;
+import entity.Product;
 import Manager.Exception.InvalidName;
 import Manager.Exception.InvalidNationalId;
 import Manager.Exception.InvalidPassword;

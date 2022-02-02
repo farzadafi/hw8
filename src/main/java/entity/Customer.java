@@ -1,4 +1,4 @@
-package Entity;
+package entity;
 
 public class Customer extends User {
     private String address;

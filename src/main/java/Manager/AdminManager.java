@@ -1,6 +1,6 @@
 package Manager;
 
-import Entity.*;
+import entity.*;
 import Service.*;
 
 import java.util.List;

@@ -1,7 +1,6 @@
 package Service;
 
-import Entity.Admin;
-import Entity.User;
+import entity.Admin;
 import Repository.AdminRepository;
 
 import java.util.List;

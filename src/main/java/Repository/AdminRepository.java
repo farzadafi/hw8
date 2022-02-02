@@ -1,7 +1,6 @@
 package Repository;
 
-import Entity.Admin;
-import Entity.SaleProduct;
+import entity.Admin;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
