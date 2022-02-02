@@ -32,4 +32,8 @@ public class SaleProductService implements Service<SaleProduct> {
     public List<SaleProduct> saleProductByCustomerId(int id){
         return saleProductRepository.saleProductByCustomerId(id);
     }
+
+    public List<SaleProduct> saleProductByAdminId(int id){
+        return saleProductRepository.saleProductByAdminId(id);
+    }
 }
