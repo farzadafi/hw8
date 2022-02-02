@@ -73,7 +73,42 @@ public class SaleProductRepository implements Repository<SaleProduct> {
         return null;
     }
 
-    @Override
+    public List<SaleProduct> saleProductByAdminId(int id) {
+        try {
+            String find = "SELECT  saleproduct.id,\n" +
+                    "        customerid,\n" +
+                    "        productid,\n" +
+                    "        saleproduct.numberproduct,\n" +
+                    "        saleproduct.price,\n" +
+                    "        datefinal\n" +
+                    "        FROM SaleProduct\n" +
+                    "        INNER JOIN Product ON productId = product.id WHERE adminid = ?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(find);
+            preparedStatement.setInt(1, id);
+            List<SaleProduct> saleProductList = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                    SaleProduct saleProduct = new SaleProduct();
+                    saleProduct.setId(resultSet.getInt("id"));
+                    saleProduct.setCustomerId(resultSet.getInt("customerId"));
+                    saleProduct.setProductId(resultSet.getInt("productId"));
+                    saleProduct.setNumber(resultSet.getInt("numberProduct"));
+                    saleProduct.setTotalPrice(resultSet.getDouble("price"));
+                    saleProduct.setDate(resultSet.getDate("dateFinal"));
+                    saleProductList.add(saleProduct);
+                }
+                return saleProductList;
+            } else
+                return null;
+        } catch (SQLException exception) {
+            System.out.println(exception.getMessage());
+        }
+        return null;
+    }
+
+
+        @Override
     public List<SaleProduct> findAll() {
         return null;
     }
