@@ -62,4 +62,20 @@ public class CustomerRepository implements Repository<Customer> {
     public int delete(int id) {
         return 0;
     }
+
+    public int addBudget(int id,Double amount){
+        try {
+            String deposit = "UPDATE UserTable SET budget = budget + ? where id = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(deposit);
+            preparedStatement.setDouble(1,amount);
+            preparedStatement.setInt(2,id);
+            return preparedStatement.executeUpdate();
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return 0;
+    }
+
+
+
 }

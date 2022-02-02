@@ -28,4 +28,14 @@ public class CustomerService implements Service<Customer> {
     public int delete(int id) {
         return 0;
     }
+
+    public int addBudget(int id,Double amount){
+        return customerRepository.addBudget(id,amount);
+    }
+
+
+
+
+
+
 }
