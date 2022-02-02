@@ -1,7 +1,7 @@
 package Service;
 
 import entity.User;
-import Repository.LoginRepository;
+import repository.LoginRepository;
 
 public class LoginService {
     LoginRepository loginRepository = new LoginRepository();

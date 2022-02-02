@@ -1,7 +1,7 @@
 package Service;
 
 import entity.CustomerBasket;
-import Repository.CustomerBasketRepository;
+import repository.CustomerBasketRepository;
 
 import java.util.List;
 
