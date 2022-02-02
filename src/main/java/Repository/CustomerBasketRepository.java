@@ -1,11 +1,14 @@
 package Repository;
 
 import Entity.Admin;
+import Entity.Category;
 import Entity.CustomerBasket;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerBasketRepository implements Repository<CustomerBasket> {
@@ -54,6 +57,53 @@ public class CustomerBasketRepository implements Repository<CustomerBasket> {
 
     @Override
     public int delete(int id) {
+        try {
+            String del = "DELETE FROM CustomerBasket WHERE id = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(del);
+            preparedStatement.setInt(1,id);
+            return preparedStatement.executeUpdate();
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
         return 0;
     }
+
+    public List<CustomerBasket> customerBasketById(int id){
+        try {
+            String findAll = "SELECT * FROM CustomerBasket WHERE customerId = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(findAll);
+            preparedStatement.setInt(1,id);
+            List<CustomerBasket> customerBasketList = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                    CustomerBasket customerBasket = new CustomerBasket();
+                    customerBasket.setId(resultSet.getInt("id"));
+                    customerBasket.setCustomerId(id);
+                    customerBasket.setProductId(resultSet.getInt("productId"));
+                    customerBasket.setNumber(resultSet.getInt("numberProduct"));
+                    customerBasket.setTotalPrice(resultSet.getDouble("price"));
+                    customerBasketList.add(customerBasket);
+                }
+                return customerBasketList;
+            } else
+                return null;
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return null;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
