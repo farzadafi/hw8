@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerRepository implements Repository<Customer> {
@@ -40,6 +41,28 @@ public class CustomerRepository implements Repository<Customer> {
 
     @Override
     public List<Customer> findAll() {
+        try {
+            String findAll = "SELECT * FROM UserTable" ;
+            PreparedStatement preparedStatement = connection.prepareStatement(findAll);
+            List<Customer> customerList = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                    Customer customer = new Customer();
+                    customer.setId(resultSet.getInt("id"));
+                    customer.setFullName(resultSet.getString("fullName"));
+                    customer.setNationalId(resultSet.getString("nationalId"));
+                    customer.setPassword(resultSet.getString("password"));
+                    customer.setBalance(resultSet.getDouble("budget"));
+                    customer.setAddress(resultSet.getString("address"));
+                    customerList.add(customer);
+                }
+                return customerList;
+            } else
+                return null;
+        } catch (SQLException exception) {
+            System.out.println(exception.getMessage());
+        }
         return null;
     }
 
@@ -61,6 +84,14 @@ public class CustomerRepository implements Repository<Customer> {
 
     @Override
     public int delete(int id) {
+        try {
+            String del = "DELETE FROM UserTable WHERE id = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(del);
+            preparedStatement.setInt(1,id);
+            return preparedStatement.executeUpdate();
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
         return 0;
     }
 
