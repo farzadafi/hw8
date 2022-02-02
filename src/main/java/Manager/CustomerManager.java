@@ -128,6 +128,14 @@ public class CustomerManager {
             System.out.println("Something is wring!");
     }
 
+    public void addBudget(int id){
+        Double budget = utility.setPriceProduct("withdraw");
+        if(customerService.addBudget(id,budget) != 0 )
+            System.out.println("This operation successful!");
+        else
+            System.out.println("Something is wrong!");
+    }
+
 
 
 
