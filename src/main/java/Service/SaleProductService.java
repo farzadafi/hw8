@@ -28,4 +28,8 @@ public class SaleProductService implements Service<SaleProduct> {
     public int delete(int id) {
         return 0;
     }
+
+    public List<SaleProduct> saleProductByCustomerId(int id){
+        return saleProductRepository.saleProductByCustomerId(id);
+    }
 }
