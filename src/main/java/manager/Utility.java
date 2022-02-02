@@ -25,7 +25,7 @@ public class Utility {
             System.out.print("Enter name(just alpha):");
             try {
                 fullName = input.nextLine();
-                invalidName.checkName(fullName);
+                checkName(fullName);
                 break;
             }catch (InvalidName except){
                 System.out.println(except.getMessage());
@@ -39,7 +39,7 @@ public class Utility {
             System.out.print("Enter National Id(just number):");
             try {
                 nationalId = input.nextLine();
-                invalidNationalId.nationalIdChecker(nationalId);
+                nationalIdChecker(nationalId);
                 break;
             }catch (InvalidNationalId except){
                 System.out.println(except.getMessage());
@@ -53,7 +53,7 @@ public class Utility {
             System.out.print("Enter your password:");
             try {
                 password = input.nextLine();
-                invalidPassword.passwordCheck(password);
+                passwordCheck(password);
                 break;
             } catch (InvalidPassword except) {
                 System.out.println(except.getMessage());
@@ -67,7 +67,7 @@ public class Utility {
             System.out.print("Enter name(just alpha):");
             try {
                 categoryName = input.nextLine();
-                invalidName.checkName(categoryName);
+                checkName(categoryName);
                 break;
             }catch (InvalidName except){
                 System.out.println(except.getMessage());
@@ -208,6 +208,59 @@ public class Utility {
             index++;
         }
         return arrayInt;
+    }
+
+    public void checkName(String name){
+        if(name.length() < 3 )
+            throw new InvalidName("name should be more than 2 character!");
+        for (Character ch:name.toCharArray()
+        ) {
+            if(Character.isDigit(ch))
+                throw new InvalidName("name can not have number!");
+        }
+        for (Character ch:name.toCharArray()
+        ) {
+            if(!Character.isAlphabetic(ch))
+                throw new InvalidName("name can't have Sign(!,@,#,%,...)");
+
+        }
+    }
+
+    public void nationalIdChecker(String nationalId){
+        if(nationalId.length() > 10 )
+            throw new InvalidNationalId("national Id can't more than ten number!");
+        if(nationalId.equals(""))
+            throw new InvalidNationalId("dont enter space!");
+        for (Character ch:nationalId.toCharArray()) {
+            if(!Character.isDigit(ch))
+                throw new InvalidNationalId("national Id should be just number!");
+        }
+    }
+
+    public void passwordCheck(String password){
+        if(password.length() < 3 )
+            throw new InvalidPassword("password should be more than 2 ");
+        char[] passwordArray = password.toCharArray();
+        char[] signArray =  new char[] {'!','@','#','$','%','^','&','*','(',')','-','+','=','.',',','>','<','?','/','|',':',';'};
+        int space = 0,lowerCase = 0,upperCase = 0,sign = 0,digit = 0;
+        for(int i=0;i<passwordArray.length;i++)
+            if(Character.isSpaceChar(passwordArray[i]))
+                ++space;
+        for(int i = 0;i<passwordArray.length;i++)
+            if(Character.isUpperCase(passwordArray[i]))
+                ++upperCase;
+        for(int i = 0;i<passwordArray.length;i++)
+            if(Character.isLowerCase(passwordArray[i]))
+                ++lowerCase;
+        for(int i = 0;i<passwordArray.length;i++)
+            if(Character.isDigit(passwordArray[i]))
+                ++digit;
+        for(int i=0;i<signArray.length;i++)
+            for(int j=0;j<passwordArray.length;j++)
+                if(signArray[i] == passwordArray[j])
+                    ++sign;
+        if( (space == 0) || (lowerCase == 0) || (upperCase == 0) || (sign == 0) || (digit == 0) )
+            throw new InvalidPassword("password should have space+lowerCase+upperCase+sign+digit!");
     }
 
 
