@@ -176,7 +176,7 @@ public class Menu {
             System.out.println("*** Customer Menu ***");
             System.out.println("1-Edit my information.");
             System.out.println("2-Add Product.");
-            System.out.println("3-Remove product.");
+            System.out.println("3-Remove product from Basket.");
             System.out.println("4-Add budget.");
             System.out.println("5-View my basket.");
             System.out.println("6-Final purchase.");
@@ -204,7 +204,7 @@ public class Menu {
                     break;
 
                 case 3:
-
+                    customerManager.removeProduct(id);
                     break;
 
                 case 4:
