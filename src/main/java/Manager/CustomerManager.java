@@ -136,6 +136,18 @@ public class CustomerManager {
             System.out.println("Something is wrong!");
     }
 
+    public void viewMyBasket(int id){
+        List<CustomerBasket> customerBasketList = customerBasketService.customerBasketById(id);
+        if(customerBasketList == null){
+            System.out.println("Unfortunately We dont have any product for sale!");
+            return;
+        }
+        for (CustomerBasket cat:customerBasketList
+        ) {
+            System.out.println(cat.toString());
+        }
+    }
+
 
 
 
