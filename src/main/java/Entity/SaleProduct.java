@@ -10,6 +10,9 @@ public class SaleProduct {
     private Double totalPrice;
     private Date date;
 
+    public SaleProduct() {
+    }
+
     public SaleProduct(int id, int customerId, int productId, int number, Double totalPrice, Date date) {
         this.id = id;
         this.customerId = customerId;
@@ -73,5 +76,17 @@ public class SaleProduct {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "SaleProduct{" +
+                "id=" + id +
+                ", customerId=" + customerId +
+                ", productId=" + productId +
+                ", number=" + number +
+                ", totalPrice=" + totalPrice +
+                ", date=" + date +
+                '}';
     }
 }
