@@ -3,6 +3,8 @@ package Manager;
 import Entity.*;
 import Service.*;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,6 +17,7 @@ public class CustomerManager {
     private CategoryService categoryService = new CategoryService();
     private ProductService productService = new ProductService();
     private CustomerBasketService customerBasketService = new CustomerBasketService();
+    private SaleProductService saleProductService = new SaleProductService();
 
 
     public void addCustomer(){
@@ -145,6 +148,38 @@ public class CustomerManager {
         for (CustomerBasket cat:customerBasketList
         ) {
             System.out.println(cat.toString());
+        }
+    }
+
+    public void finalPurchase(int id){
+        List<CustomerBasket> customerBasketList = customerBasketService.customerBasketById(id);
+        if(customerBasketList == null){
+            System.out.println("Unfortunately We dont have any product for sale!");
+            return;
+        }
+        Double calcPriceProduct = 0d;
+        for (CustomerBasket cat:customerBasketList
+             ) {
+            calcPriceProduct += cat.getTotalPrice();
+        }
+        Double customerBudget = customerService.returnBudget(id);
+        if(calcPriceProduct > customerBudget ){
+            System.out.println("You dont have enough budget!");
+            return;
+        }
+        LocalDate localDate = LocalDate.now();
+        Date date = Date.valueOf(localDate);
+        for (CustomerBasket cat:customerBasketList
+             ) {
+            if(cat.getNumber() > productService.returnNumberProduct(cat.getProductId()))
+                System.out.println("We dont have enough " + cat.getId() + " !");
+            else{
+                SaleProduct saleProduct = new SaleProduct(cat.getCustomerId(),cat.getProductId(),cat.getNumber(),cat.getTotalPrice(),date);
+                saleProductService.add(saleProduct);
+                productService.minesNumberProduct(cat.getProductId(),cat.getNumber());
+                customerService.addBudget(id,-cat.getTotalPrice());
+                customerBasketService.delete(customerBasketService.findIdBy(cat.getCustomerId(),cat.getProductId(), cat.getNumber()));
+            }
         }
     }
 
