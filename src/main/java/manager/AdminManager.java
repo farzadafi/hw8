@@ -1,7 +1,7 @@
 package manager;
 
 import entity.*;
-import Service.*;
+import service.*;
 
 import java.util.List;
 import java.util.Scanner;

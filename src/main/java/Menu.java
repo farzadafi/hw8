@@ -1,7 +1,7 @@
 import entity.User;
 import manager.AdminManager;
 import manager.CustomerManager;
-import Service.LoginService;
+import service.LoginService;
 
 import java.sql.SQLException;
 import java.util.InputMismatchException;
