@@ -1,10 +1,13 @@
 package Repository;
 
 import Entity.Admin;
+import Entity.SaleProduct;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdminRepository implements Repository<Admin> {
@@ -47,6 +50,26 @@ public class AdminRepository implements Repository<Admin> {
 
     @Override
     public List<Admin> findAll() {
+        try {
+            String findAll = "SELECT * FROM UserTable" ;
+            PreparedStatement preparedStatement = connection.prepareStatement(findAll);
+            List<Admin> adminList = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                    Admin admin = new Admin();
+                    admin.setId(resultSet.getInt("id"));
+                    admin.setFullName(resultSet.getString("fullName"));
+                    admin.setNationalId(resultSet.getString("nationalId"));
+                    admin.setPassword(resultSet.getString("password"));
+                    adminList.add(admin);
+                }
+                return adminList;
+            } else
+                return null;
+        } catch (SQLException exception) {
+            System.out.println(exception.getMessage());
+        }
         return null;
     }
 
@@ -67,6 +90,14 @@ public class AdminRepository implements Repository<Admin> {
 
     @Override
     public int delete(int id) {
+        try {
+            String del = "DELETE FROM UsetTable WHERE id = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(del);
+            preparedStatement.setInt(1,id);
+            return preparedStatement.executeUpdate();
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
         return 0;
     }
 }
