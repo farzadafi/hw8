@@ -158,6 +158,10 @@ public class Menu {
                     adminManager.removeProduct(id);
                     break;
 
+                case 8:
+                    adminManager.saleProduct(id);
+                    break;
+
                 case 10:
                     System.out.println("Good luck!");
                     isTrue = false;
