@@ -1,10 +1,13 @@
 package Repository;
 
+import Entity.CustomerBasket;
 import Entity.SaleProduct;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SaleProductRepository implements Repository<SaleProduct> {
@@ -41,6 +44,33 @@ public class SaleProductRepository implements Repository<SaleProduct> {
             System.out.println(exception.getMessage());
         }
         return 0;
+    }
+
+    public List<SaleProduct> saleProductByCustomerId(int id){
+        try {
+            String findAll = "SELECT * FROM SaleProduct WHERE customerId = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(findAll);
+            preparedStatement.setInt(1,id);
+            List<SaleProduct> saleProductList = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                    SaleProduct saleProduct = new SaleProduct();
+                    saleProduct.setId(resultSet.getInt("id"));
+                    saleProduct.setCustomerId(resultSet.getInt("customerId"));
+                    saleProduct.setProductId(resultSet.getInt("productId"));
+                    saleProduct.setNumber(resultSet.getInt("numberProduct"));
+                    saleProduct.setTotalPrice(resultSet.getDouble("price"));
+                    saleProduct.setDate(resultSet.getDate("dateFinal"));
+                    saleProductList.add(saleProduct);
+                }
+                return saleProductList;
+            } else
+                return null;
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return null;
     }
 
     @Override
