@@ -1,13 +1,17 @@
 package Service;
 
 import Entity.SaleProduct;
+import Repository.SaleProductRepository;
 
 import java.util.List;
 
-public class SaleProductRepository implements Service<SaleProduct> {
+public class SaleProductService implements Service<SaleProduct> {
+    private SaleProductRepository saleProductRepository = new SaleProductRepository();
+
+
     @Override
     public int add(SaleProduct saleProduct) {
-        return 0;
+        return saleProductRepository.add(saleProduct);
     }
 
     @Override
