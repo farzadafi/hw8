@@ -26,6 +26,10 @@ public class CustomerBasketService implements Service<CustomerBasket> {
 
     @Override
     public int delete(int id) {
-        return 0;
+        return customerBasketRepository.delete(id);
+    }
+
+    public List<CustomerBasket> customerBasketById(int id){
+        return customerBasketRepository.customerBasketById(id);
     }
 }
