@@ -32,4 +32,8 @@ public class CustomerBasketService implements Service<CustomerBasket> {
     public List<CustomerBasket> customerBasketById(int id){
         return customerBasketRepository.customerBasketById(id);
     }
+
+    public int findIdBy(int customerId,int productId,int numberProduct){
+        return customerBasketRepository.findIdBy(customerId,productId,numberProduct);
+    }
 }
