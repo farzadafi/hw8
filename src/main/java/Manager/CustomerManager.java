@@ -106,4 +106,45 @@ public class CustomerManager {
         else
             System.out.println("Something is wrong!");
     }
+
+    public void removeProduct(int id){
+        List<CustomerBasket> customerBasketList = customerBasketService.customerBasketById(id);
+        if(customerBasketList == null){
+            System.out.println("Unfortunately We dont have any product for sale!");
+            return;
+        }
+        int[] array = utility.returnIdCustomerBasket(customerBasketList);
+        for (CustomerBasket cat:customerBasketList
+        ) {
+            System.out.println(cat.toString());
+        }
+        int idCustomerBasket = utility.setId(array);
+        if(idCustomerBasket == 0 ){
+            return;
+        }
+        if(customerBasketService.delete(idCustomerBasket) != 0 )
+            System.out.println("This product successful removed!");
+        else
+            System.out.println("Something is wring!");
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
