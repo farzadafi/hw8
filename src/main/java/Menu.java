@@ -208,7 +208,7 @@ public class Menu {
                     break;
 
                 case 4:
-
+                    customerManager.addBudget(id);
                     break;
 
                 case 5:
