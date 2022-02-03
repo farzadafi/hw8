@@ -1,13 +1,14 @@
 package repository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface Repository<T> {
-   int add(T t);
+   int add(T t) throws SQLException;
 
-   List<T> findAll();
+   List<T> findAll() throws SQLException;
 
-   int update(T t);
+   int update(T t) throws SQLException;
 
-   int delete(int id);
+   int delete(int id) throws SQLException;
 }

@@ -19,8 +19,7 @@ public class LoginRepository {
         }
     }
 
-    public User returnUser(String nationalId){
-        try {
+    public User returnUser(String nationalId) throws SQLException {
             String findUser = "SELECT * FROM UserTable WHERE nationalId = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(findUser);
             preparedStatement.setString(1, nationalId);
@@ -30,9 +29,5 @@ public class LoginRepository {
                 return user;
             } else
                 return null;
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return null;
     }
 }

@@ -3,6 +3,7 @@ package service;
 import entity.Product;
 import repository.ProductRepository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class ProductService implements Service<Product> {
@@ -11,7 +12,12 @@ public class ProductService implements Service<Product> {
 
     @Override
     public int add(Product product) {
-        return productRepository.add(product);
+        try {
+            return productRepository.add(product);
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return 0;
     }
 
     @Override
@@ -21,27 +27,57 @@ public class ProductService implements Service<Product> {
 
     @Override
     public int update(Product product) {
-        return productRepository.update(product);
+        try {
+            return productRepository.update(product);
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return 0;
     }
 
     @Override
     public int delete(int id) {
-       return productRepository.delete(id);
+        try {
+            return productRepository.delete(id);
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return 0;
     }
 
     public List<Product> showAdminProduct(int id){
-        return productRepository.showAdminProduct(id);
+        try {
+            return productRepository.showAdminProduct(id);
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return null;
     }
 
     public List<Product> showProductForCustomer(int idCategory,int idBrand){
-        return productRepository.showProductForCustomer(idCategory,idBrand);
+        try {
+            return productRepository.showProductForCustomer(idCategory,idBrand);
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return null;
     }
 
     public int returnNumberProduct(int id){
-        return productRepository.returnNumberProduct(id);
+        try {
+            return productRepository.returnNumberProduct(id);
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return 0;
     }
 
     public int minesNumberProduct(int id,int number){
-        return productRepository.minesNumberProduct(id,number);
+        try {
+            return productRepository.minesNumberProduct(id,number);
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return 0;
     }
 }

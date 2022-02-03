@@ -3,6 +3,7 @@ package service;
 import entity.Customer;
 import repository.CustomerRepository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class CustomerService implements Service<Customer> {
@@ -11,7 +12,12 @@ public class CustomerService implements Service<Customer> {
 
     @Override
     public int add(Customer customer) {
-        return customerRepository.add(customer);
+        try {
+            return customerRepository.add(customer);
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return 0;
     }
 
     @Override
@@ -21,7 +27,12 @@ public class CustomerService implements Service<Customer> {
 
     @Override
     public int update(Customer customer) {
-        return customerRepository.update(customer);
+        try {
+            return customerRepository.update(customer);
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return 0;
     }
 
     @Override
@@ -30,11 +41,21 @@ public class CustomerService implements Service<Customer> {
     }
 
     public int addBudget(int id,Double amount){
-        return customerRepository.addBudget(id,amount);
+        try {
+            return customerRepository.addBudget(id,amount);
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return 0;
     }
 
     public Double returnBudget(int id){
-        return customerRepository.returnBudget(id);
+        try {
+            return customerRepository.returnBudget(id);
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return  0d;
     }
 
 

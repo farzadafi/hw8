@@ -28,8 +28,7 @@ public class CustomerBasketRepository implements Repository<CustomerBasket> {
     }
 
     @Override
-    public int add(CustomerBasket customerBasket) {
-        try {
+    public int add(CustomerBasket customerBasket) throws SQLException {
             String add = "INSERT INTO CustomerBasket(customerId,productId,numberProduct,price) VALUES (?,?,?,?) ";
             PreparedStatement preparedStatement = connection.prepareStatement(add);
             preparedStatement.setInt(1, customerBasket.getCustomerId());
@@ -37,15 +36,10 @@ public class CustomerBasketRepository implements Repository<CustomerBasket> {
             preparedStatement.setInt(3, customerBasket.getNumber());
             preparedStatement.setDouble(4, customerBasket.getTotalPrice());
             return preparedStatement.executeUpdate();
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return 0;
     }
 
     @Override
-    public List<CustomerBasket> findAll() {
-        try {
+    public List<CustomerBasket> findAll() throws SQLException {
             String findAll = "SELECT * FROM CustomerBasket ";
             PreparedStatement preparedStatement = connection.prepareStatement(findAll);
             List<CustomerBasket> customerBasketList = new ArrayList<>();
@@ -63,10 +57,6 @@ public class CustomerBasketRepository implements Repository<CustomerBasket> {
                 return customerBasketList;
             } else
                 return null;
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return null;
     }
 
     @Override
@@ -75,20 +65,14 @@ public class CustomerBasketRepository implements Repository<CustomerBasket> {
     }
 
     @Override
-    public int delete(int id) {
-        try {
+    public int delete(int id) throws SQLException {
             String del = "DELETE FROM CustomerBasket WHERE id = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(del);
             preparedStatement.setInt(1,id);
             return preparedStatement.executeUpdate();
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return 0;
     }
 
-    public List<CustomerBasket> customerBasketById(int id){
-        try {
+    public List<CustomerBasket> customerBasketById(int id) throws SQLException {
             String findAll = "SELECT * FROM CustomerBasket WHERE customerId = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(findAll);
             preparedStatement.setInt(1,id);
@@ -107,14 +91,9 @@ public class CustomerBasketRepository implements Repository<CustomerBasket> {
                 return customerBasketList;
             } else
                 return null;
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return null;
     }
 
-    public int findIdBy(int customerId,int productId,int numberProduct){
-        try {
+    public int findIdBy(int customerId,int productId,int numberProduct) throws SQLException {
             String findId = "SELECT id FROM CustomerBasket WHERE CustomerId = ? AND ProductId = ? AND numberProduct = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(findId);
             preparedStatement.setInt(1,customerId);
@@ -125,10 +104,6 @@ public class CustomerBasketRepository implements Repository<CustomerBasket> {
                 return resultSet.getInt("id");
             else
                 return 0;
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return 0;
     }
 
 

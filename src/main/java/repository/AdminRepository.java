@@ -30,8 +30,7 @@ public class AdminRepository implements Repository<Admin> {
     }
 
     @Override
-    public int add(Admin admin) {
-        try {
+    public int add(Admin admin) throws SQLException {
             String add = "INSERT INTO UserTable(fullName,nationalId,password,kind,address,budget) VALUES (?,?,?,?,?,?) ";
             PreparedStatement preparedStatement = connection.prepareStatement(add);
             preparedStatement.setString(1, admin.getFullName());
@@ -41,15 +40,10 @@ public class AdminRepository implements Repository<Admin> {
             preparedStatement.setString(5, null);
             preparedStatement.setDouble(6, 0);
             return preparedStatement.executeUpdate();
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return 0;
     }
 
     @Override
-    public List<Admin> findAll() {
-        try {
+    public List<Admin> findAll() throws SQLException {
             String findAll = "SELECT * FROM UserTable" ;
             PreparedStatement preparedStatement = connection.prepareStatement(findAll);
             List<Admin> adminList = new ArrayList<>();
@@ -66,37 +60,23 @@ public class AdminRepository implements Repository<Admin> {
                 return adminList;
             } else
                 return null;
-        } catch (SQLException exception) {
-            System.out.println(exception.getMessage());
-        }
-        return null;
     }
 
     @Override
-    public int update(Admin admin) {
-        try {
+    public int update(Admin admin) throws SQLException {
             String update = "UPDATE UserTable SET fullName = ? , password = ? WHERE id = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(update);
             preparedStatement.setString(1,admin.getFullName());
             preparedStatement.setString(2,admin.getPassword());
             preparedStatement.setInt(3,admin.getId());
             return preparedStatement.executeUpdate();
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return 0;
     }
 
     @Override
-    public int delete(int id) {
-        try {
+    public int delete(int id) throws SQLException {
             String del = "DELETE FROM UsetTable WHERE id = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(del);
             preparedStatement.setInt(1,id);
             return preparedStatement.executeUpdate();
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return 0;
     }
 }

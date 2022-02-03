@@ -3,6 +3,7 @@ package service;
 import entity.SaleProduct;
 import repository.SaleProductRepository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class SaleProductService implements Service<SaleProduct> {
@@ -33,7 +34,12 @@ public class SaleProductService implements Service<SaleProduct> {
         return saleProductRepository.saleProductByCustomerId(id);
     }
 
-    public List<SaleProduct> saleProductByAdminId(int id){
-        return saleProductRepository.saleProductByAdminId(id);
+    public List<SaleProduct> saleProductByAdminId(int id) {
+        try {
+            return saleProductRepository.saleProductByAdminId(id);
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return null;
     }
 }

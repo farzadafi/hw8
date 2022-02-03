@@ -72,8 +72,7 @@ public class SaleProductRepository implements Repository<SaleProduct> {
         return null;
     }
 
-    public List<SaleProduct> saleProductByAdminId(int id) {
-        try {
+    public List<SaleProduct> saleProductByAdminId(int id) throws SQLException {
             String find = "SELECT  saleproduct.id,\n" +
                     "        customerid,\n" +
                     "        productid,\n" +
@@ -100,10 +99,6 @@ public class SaleProductRepository implements Repository<SaleProduct> {
                 return saleProductList;
             } else
                 return null;
-        } catch (SQLException exception) {
-            System.out.println(exception.getMessage());
-        }
-        return null;
     }
 
 

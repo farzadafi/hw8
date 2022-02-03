@@ -24,22 +24,16 @@ public class CategoryRepository implements Repository<Category> {
     }
 
     @Override
-    public int add(Category category) {
-        try {
+    public int add(Category category) throws SQLException {
             String add = "INSERT INTO Category(parentId,nameCategory) VALUES (?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(add);
             preparedStatement.setInt(1, category.getParentId());
             preparedStatement.setString(2, category.getName());
             return preparedStatement.executeUpdate();
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return 0;
     }
 
     @Override
-    public List<Category> findAll() {
-        try {
+    public List<Category> findAll() throws SQLException {
             String findAll = "SELECT * FROM Category WHERE parentId = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(findAll);
             preparedStatement.setInt(1,0);
@@ -55,10 +49,6 @@ public class CategoryRepository implements Repository<Category> {
                 return categoryList;
             } else
                 return null;
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return null;
     }
 
     @Override
@@ -67,21 +57,15 @@ public class CategoryRepository implements Repository<Category> {
     }
 
     @Override
-    public int delete(int id) {
-        try {
+    public int delete(int id) throws SQLException {
             String del = "DELETE FROM Category WHERE id = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(del);
             preparedStatement.setInt(1,id);
             return preparedStatement.executeUpdate();
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return 0;
     }
 
 
-    public List<Category> showCategory(int number) {
-        try {
+    public List<Category> showCategory(int number) throws SQLException {
             String findAll = "SELECT * FROM Category WHERE parentId = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(findAll);
             preparedStatement.setInt(1,number);
@@ -97,9 +81,6 @@ public class CategoryRepository implements Repository<Category> {
                 return categoryList;
             } else
                 return null;
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return null;
     }
+
 }

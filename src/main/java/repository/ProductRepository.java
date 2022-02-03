@@ -30,8 +30,7 @@ public class ProductRepository implements Repository<Product> {
     }
 
     @Override
-    public int add(Product product) {
-        try {
+    public int add(Product product) throws SQLException {
             String add = "INSERT INTO Product(adminId,categoryId,brandId,nameProduct,numberProduct,price) VALUES (?,?,?,?,?,?) ";
             PreparedStatement preparedStatement = connection.prepareStatement(add);
             preparedStatement.setInt(1, product.getAdminId());
@@ -41,10 +40,6 @@ public class ProductRepository implements Repository<Product> {
             preparedStatement.setInt(5, product.getNumber());
             preparedStatement.setDouble(6, product.getPrice());
             return preparedStatement.executeUpdate();
-        } catch (SQLException exception) {
-            System.out.println(exception.getMessage());
-        }
-        return 0;
     }
 
 
@@ -54,35 +49,24 @@ public class ProductRepository implements Repository<Product> {
     }
 
     @Override
-    public int update(Product product) {
-        try {
+    public int update(Product product) throws SQLException {
             String update = "UPDATE product SET numberProduct = numberProduct + ? , price = ? WHERE id = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(update);
             preparedStatement.setInt(1,product.getNumber());
             preparedStatement.setDouble(2,product.getPrice());
             preparedStatement.setInt(3,product.getId());
             return preparedStatement.executeUpdate();
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return 0;
     }
 
     @Override
-    public int delete(int id) {
-        try {
+    public int delete(int id) throws SQLException {
             String delete = "DELETE FROM product WHERE id = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(delete);
             preparedStatement.setInt(1,id);
             return preparedStatement.executeUpdate();
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return 0;
     }
 
-    public List<Product> showAdminProduct(int id){
-        try {
+    public List<Product> showAdminProduct(int id) throws SQLException {
             String findAll = "SELECT * FROM Product WHERE adminId = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(findAll);
             preparedStatement.setInt(1,id);
@@ -102,14 +86,9 @@ public class ProductRepository implements Repository<Product> {
                 return productList;
             } else
                 return null;
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return null;
     }
 
-    public List<Product> showProductForCustomer(int idCategory,int idBrand) {
-        try {
+    public List<Product> showProductForCustomer(int idCategory,int idBrand) throws SQLException {
             String findAll = "SELECT * FROM Product WHERE categoryId = ? AND brandId = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(findAll);
             preparedStatement.setInt(1, idCategory);
@@ -130,14 +109,9 @@ public class ProductRepository implements Repository<Product> {
                 return productList;
             } else
                 return null;
-        } catch (SQLException exception) {
-            System.out.println(exception.getMessage());
-        }
-        return null;
     }
 
-    public int returnNumberProduct(int id){
-        try {
+    public int returnNumberProduct(int id) throws SQLException {
             String number = "SELECT numberProduct FROM Product WHERE id = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(number);
             preparedStatement.setInt(1, id);
@@ -146,23 +120,14 @@ public class ProductRepository implements Repository<Product> {
                 return resultSet.getInt("numberProduct");
             else
                 return 0;
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return 0;
     }
 
-    public int minesNumberProduct(int id,int number){
-        try {
+    public int minesNumberProduct(int id,int number) throws SQLException {
             String mines = "UPDATE Product SET numberProduct = numberProduct - ? WHERE id = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(mines);
             preparedStatement.setInt(1,number);
             preparedStatement.setInt(2,id);
             return preparedStatement.executeUpdate();
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return 0;
     }
 
 

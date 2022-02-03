@@ -3,6 +3,7 @@ package service;
 import entity.CustomerBasket;
 import repository.CustomerBasketRepository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class CustomerBasketService implements Service<CustomerBasket> {
@@ -11,7 +12,12 @@ public class CustomerBasketService implements Service<CustomerBasket> {
 
     @Override
     public int add(CustomerBasket customerBasket) {
-        return customerBasketRepository.add(customerBasket);
+        try {
+            return customerBasketRepository.add(customerBasket);
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return 0;
     }
 
     @Override
@@ -26,14 +32,29 @@ public class CustomerBasketService implements Service<CustomerBasket> {
 
     @Override
     public int delete(int id) {
-        return customerBasketRepository.delete(id);
+        try {
+            return customerBasketRepository.delete(id);
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return 0;
     }
 
     public List<CustomerBasket> customerBasketById(int id){
-        return customerBasketRepository.customerBasketById(id);
+        try {
+            return customerBasketRepository.customerBasketById(id);
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return null;
     }
 
     public int findIdBy(int customerId,int productId,int numberProduct){
-        return customerBasketRepository.findIdBy(customerId,productId,numberProduct);
+        try {
+            return customerBasketRepository.findIdBy(customerId,productId,numberProduct);
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return 0;
     }
 }

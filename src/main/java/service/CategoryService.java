@@ -3,6 +3,7 @@ package service;
 import entity.Category;
 import repository.CategoryRepository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class CategoryService implements Service<Category> {
@@ -11,12 +12,22 @@ public class CategoryService implements Service<Category> {
 
     @Override
     public int add(Category category) {
-        return categoryRepository.add(category);
+        try {
+            return categoryRepository.add(category);
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return 0;
     }
 
     @Override
     public List<Category> findAll() {
-        return categoryRepository.findAll();
+        try {
+            return categoryRepository.findAll();
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return null;
     }
 
     @Override
@@ -30,6 +41,11 @@ public class CategoryService implements Service<Category> {
     }
 
     public List<Category> showCategory(int number){
-        return categoryRepository.showCategory(number);
+        try {
+            return categoryRepository.showCategory(number);
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return null;
     }
 }

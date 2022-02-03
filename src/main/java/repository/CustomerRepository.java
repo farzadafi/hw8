@@ -21,8 +21,7 @@ public class CustomerRepository implements Repository<Customer> {
     }
 
     @Override
-    public int add(Customer customer) {
-        try {
+    public int add(Customer customer) throws SQLException {
             String add = "INSERT INTO UserTable(fullName,nationalId,password,kind,address,budget) VALUES (?,?,?,?,?,?) ";
             PreparedStatement preparedStatement = connection.prepareStatement(add);
             preparedStatement.setString(1, customer.getFullName());
@@ -32,15 +31,10 @@ public class CustomerRepository implements Repository<Customer> {
             preparedStatement.setString(5, customer.getAddress());
             preparedStatement.setDouble(6, customer.getBalance());
             return preparedStatement.executeUpdate();
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return 0;
     }
 
     @Override
-    public List<Customer> findAll() {
-        try {
+    public List<Customer> findAll() throws SQLException {
             String findAll = "SELECT * FROM UserTable" ;
             PreparedStatement preparedStatement = connection.prepareStatement(findAll);
             List<Customer> customerList = new ArrayList<>();
@@ -59,15 +53,10 @@ public class CustomerRepository implements Repository<Customer> {
                 return customerList;
             } else
                 return null;
-        } catch (SQLException exception) {
-            System.out.println(exception.getMessage());
-        }
-        return null;
     }
 
     @Override
-    public int update(Customer customer) {
-        try {
+    public int update(Customer customer) throws SQLException {
             String update = "UPDATE UserTable SET fullName = ? , password = ? , address = ?  WHERE id = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(update);
             preparedStatement.setString(1,customer.getFullName());
@@ -75,40 +64,25 @@ public class CustomerRepository implements Repository<Customer> {
             preparedStatement.setString(3,customer.getAddress());
             preparedStatement.setInt(4,customer.getId());
             return preparedStatement.executeUpdate();
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return 0;
     }
 
     @Override
-    public int delete(int id) {
-        try {
+    public int delete(int id) throws SQLException {
             String del = "DELETE FROM UserTable WHERE id = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(del);
             preparedStatement.setInt(1,id);
             return preparedStatement.executeUpdate();
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return 0;
     }
 
-    public int addBudget(int id,Double amount){
-        try {
+    public int addBudget(int id,Double amount) throws SQLException {
             String deposit = "UPDATE UserTable SET budget = budget + ? where id = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(deposit);
             preparedStatement.setDouble(1,amount);
             preparedStatement.setInt(2,id);
             return preparedStatement.executeUpdate();
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return 0;
     }
 
-    public Double returnBudget(int id){
-        try {
+    public Double returnBudget(int id) throws SQLException {
             String budget = "SELECT budget FROM UserTable WHERE id = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(budget);
             preparedStatement.setInt(1,id);
@@ -117,10 +91,6 @@ public class CustomerRepository implements Repository<Customer> {
                 return resultSet.getDouble("budget");
             else
                 return 0d;
-        }catch (SQLException exception){
-            System.out.println(exception.getMessage());
-        }
-        return 0d;
     }
 
 

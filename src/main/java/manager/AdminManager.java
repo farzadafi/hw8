@@ -160,7 +160,7 @@ public class AdminManager {
                 System.out.println("Something is wrong!");
         }
 
-    public void saleProduct(int id){
+    public void saleProduct(int id) {
         List<SaleProduct> saleProductList = saleProductService.saleProductByAdminId(id);
         if(saleProductList == null ) {
             System.out.println("You dont have any Sale!");
