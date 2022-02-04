@@ -45,6 +45,15 @@ public class ProductService implements Service<Product> {
         return 0;
     }
 
+    public int returnAdminId(int id){
+        try {
+            return productRepository.returnAdminId(id);
+        }catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        return 0;
+    }
+
     public List<Product> showAdminProduct(int id){
         try {
             return productRepository.showAdminProduct(id);

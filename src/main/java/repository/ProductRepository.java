@@ -130,6 +130,17 @@ public class ProductRepository implements Repository<Product> {
             return preparedStatement.executeUpdate();
     }
 
+    public int returnAdminId(int id) throws SQLException {
+        String AdminId = "SELECT adminId FROM Product WHERE id = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(AdminId);
+        preparedStatement.setInt(1,id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next())
+            return resultSet.getInt("adminId");
+        else
+            return 0;
+    }
+
 
 
 
