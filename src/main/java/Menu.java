@@ -158,6 +158,10 @@ public class Menu {
                     adminManager.removeProduct(id);
                     break;
 
+                case 7:
+                    customerManager.setOffCode();
+                    break;
+
                 case 8:
                     adminManager.saleProduct(id);
                     break;
